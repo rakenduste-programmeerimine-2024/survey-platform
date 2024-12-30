@@ -42,14 +42,14 @@ Questr sobib suurepäraselt neile, kes soovivad saada kiiret tagasisidet erineva
 ---
 ## Projekti Tööplaan
 
-**25-31.12**
+**30.12–05.01**
 
 - Luua esialgne projekti raamistik (React/Next.js, Node.js).
 - Alustada kasutaja autentimise ja andmebaasi integreerimisega.
 - Luua API küsitluste loomise ja sirvimise jaoks.
 - Kujundada küsitluste loendi ja üksikasjade esialgne kasutajaliides.
 
-**01–07.01**
+**06–12.01**
 
 - Rakendada küsitluste loomise ja vastamise funktsioon.
 - Lisada küsitluste tulemuste analüüs (graafikud ja statistika).
@@ -57,7 +57,7 @@ Questr sobib suurepäraselt neile, kes soovivad saada kiiret tagasisidet erineva
 - Testida kasutajate registreerimist ja sisselogimist.
 
 
-**08–14.01**
+**13–19.01**
 
 - Viia läbi põhjalik testimine ja parandada bugid.
 - Täiendada UI disaini ja kasutajakogemust.
