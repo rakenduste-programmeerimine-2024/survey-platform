@@ -11,48 +11,58 @@ import {
 const HomeContent = () => {
   return (
     <Container sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        Welcome to Survey Platform
+      <Typography variant="h4" gutterBottom sx={{ textAlign: "center", fontWeight: 600 }}>
+        Tere tulemast QuestR küsitlus lehele
       </Typography>
-      <Typography variant="body1" gutterBottom>
-        Discover, participate, and create surveys effortlessly.
+      <Typography variant="body1" gutterBottom sx={{ textAlign: "center", color: "text.secondary" }}>
+        Avasta, osale ja loo küsitlusi kiirelt ja lihtsalt.
       </Typography>
-      <Grid container spacing={4}>
+      
+      {/* Grid container for cards */}
+      <Grid container spacing={4} justifyContent="center">
         <Grid item xs={12} sm={6} md={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6">Browse Surveys</Typography>
-              <Typography variant="body2">
-                Explore a variety of surveys from different categories.
+          <Card sx={{ boxShadow: 3, borderRadius: 2, bgcolor: "#f7f7f7" }}>
+            <CardContent sx={{ textAlign: "center" }}>
+              <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                Vaata küsitlusi
               </Typography>
-              <Button variant="contained" sx={{ mt: 2 }}>
-                Browse
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                Avasta erivaldkondade küsitlusi mis sulle huvi pakuvad.
+              </Typography>
+              <Button variant="contained" sx={{ mt: 2, bgcolor: "#3f51b5" }}>
+                Vaata
               </Button>
             </CardContent>
           </Card>
         </Grid>
+        
         <Grid item xs={12} sm={6} md={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6">Create Surveys</Typography>
-              <Typography variant="body2">
-                Sign up and start creating your own surveys today.
+          <Card sx={{ boxShadow: 3, borderRadius: 2, bgcolor: "#f7f7f7" }}>
+            <CardContent sx={{ textAlign: "center" }}>
+              <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                Loo küsitlus
               </Typography>
-              <Button variant="contained" sx={{ mt: 2 }}>
-                Get Started
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                Registreeru ja alusta oma küsitluste loomist.
+              </Typography>
+              <Button variant="contained" sx={{ mt: 2, bgcolor: "#3f51b5" }}>
+                Alusta
               </Button>
             </CardContent>
           </Card>
         </Grid>
+
         <Grid item xs={12} sm={6} md={4}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6">View Results</Typography>
-              <Typography variant="body2">
-                Analyze survey responses with intuitive charts.
+          <Card sx={{ boxShadow: 3, borderRadius: 2, bgcolor: "#f7f7f7" }}>
+            <CardContent sx={{ textAlign: "center" }}>
+              <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                Vaata tulemusi
               </Typography>
-              <Button variant="contained" sx={{ mt: 2 }}>
-                View Results
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                Analüüsi küsitluse vastusi erinevate diagrammidega.
+              </Typography>
+              <Button variant="contained" sx={{ mt: 2, bgcolor: "#3f51b5" }}>
+                Vaata tulemusi
               </Button>
             </CardContent>
           </Card>

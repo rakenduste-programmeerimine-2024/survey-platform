@@ -41,7 +41,7 @@ export default function RootLayout({
                     href="/"
                     className="ml-3 text-lg font-bold hover:underline"
                   >
-                    Survey Platform
+                    QuestR küsitlused
                   </Link>
                 </div>
 
@@ -50,13 +50,13 @@ export default function RootLayout({
                     href="/about"
                     className="text-sm font-medium hover:underline"
                   >
-                    About
+                    Meist
                   </Link>
                   <Link
                     href="/contact"
                     className="text-sm font-medium hover:underline"
                   >
-                    Contact
+                    Kontakt
                   </Link>
                   <HeaderAuth />
                 </div>
