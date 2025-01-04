@@ -1,16 +1,18 @@
-import Hero from "@/components/hero";
-import ConnectSupabaseSteps from "@/components/tutorial/connect-supabase-steps";
-import SignUpUserSteps from "@/components/tutorial/sign-up-user-steps";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
+import React from "react";
+import { AppBar, Toolbar, Typography } from "@mui/material";
+import HomeContent from "../components/Home/HomeContent";
 
-export default async function Index() {
+const Home = () => {
   return (
     <>
-      <Hero />
-      <main className="flex-1 flex flex-col gap-6 px-4">
-        <h2 className="font-medium text-xl mb-4">Next steps</h2>
-        {hasEnvVars ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-      </main>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6">Survey Platform</Typography>
+        </Toolbar>
+      </AppBar>
+      <HomeContent />
     </>
   );
-}
+};
+
+export default Home;
