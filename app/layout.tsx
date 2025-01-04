@@ -1,5 +1,4 @@
 import HeaderAuth from "@/components/header-auth";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
 import Link from "next/link";
@@ -47,13 +46,13 @@ export default function RootLayout({
 
                 <div className="flex items-center gap-5">
                   <Link
-                    href="/about"
+                    href="/meist"
                     className="text-sm font-medium hover:underline"
                   >
                     Meist
                   </Link>
                   <Link
-                    href="/contact"
+                    href="/kontakt"
                     className="text-sm font-medium hover:underline"
                   >
                     Kontakt
@@ -71,7 +70,6 @@ export default function RootLayout({
                   © {new Date().getFullYear()} Survey Platform. All rights
                   reserved.
                 </p>
-                <ThemeSwitcher />
               </footer>
             </div>
           </main>
