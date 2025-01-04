@@ -29,7 +29,19 @@ const HomeContent = () => {
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
                 Avasta erivaldkondade küsitlusi mis sulle huvi pakuvad.
               </Typography>
-              <Button variant="contained" sx={{ mt: 2, bgcolor: "#3f51b5" }}>
+              <Button
+                variant="contained"
+                sx={{
+                  mt: 2,
+                  bgcolor: "#3f51b5",
+                  color: "#fff", // Teksti värv valgeks
+                  "&:hover": {
+                    bgcolor: "#303f9f", // Hover taust on tumedam sinine
+                    color: "#fff", // Hover ajal teksti värv ei muutu
+                  },
+                  width: "100%",
+                }}
+              >
                 Vaata
               </Button>
             </CardContent>
@@ -45,7 +57,19 @@ const HomeContent = () => {
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
                 Registreeru ja alusta oma küsitluste loomist.
               </Typography>
-              <Button variant="contained" sx={{ mt: 2, bgcolor: "#3f51b5" }}>
+              <Button
+                variant="contained"
+                sx={{
+                  mt: 2,
+                  bgcolor: "#3f51b5",
+                  color: "#fff", // Teksti värv valgeks
+                  "&:hover": {
+                    bgcolor: "#303f9f", // Hover taust on tumedam sinine
+                    color: "#fff", // Hover ajal teksti värv ei muutu
+                  },
+                  width: "100%",
+                }}
+              >
                 Alusta
               </Button>
             </CardContent>
@@ -61,7 +85,19 @@ const HomeContent = () => {
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
                 Analüüsi küsitluse vastusi erinevate diagrammidega.
               </Typography>
-              <Button variant="contained" sx={{ mt: 2, bgcolor: "#3f51b5" }}>
+              <Button
+                variant="contained"
+                sx={{
+                  mt: 2,
+                  bgcolor: "#3f51b5",
+                  color: "#fff", 
+                  "&:hover": {
+                    bgcolor: "#303f9f", 
+                    color: "#fff", 
+                  },
+                  width: "100%",
+                }}
+              >
                 Vaata tulemusi
               </Button>
             </CardContent>
