@@ -6,7 +6,7 @@ import Image from "next/image";
 import "./globals.css";
 
 export const metadata = {
-  title: "Survey Platform",
+  title: "QuestR survey",
   description: "Discover, create, and manage surveys effortlessly.",
 };
 

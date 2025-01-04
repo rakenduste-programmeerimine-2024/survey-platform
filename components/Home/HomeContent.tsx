@@ -18,7 +18,6 @@ const HomeContent = () => {
         Avasta, osale ja loo küsitlusi kiirelt ja lihtsalt.
       </Typography>
       
-      {/* Grid container for cards */}
       <Grid container spacing={4} justifyContent="center">
         <Grid item xs={12} sm={6} md={4}>
           <Card sx={{ boxShadow: 3, borderRadius: 2, bgcolor: "#f7f7f7" }}>
@@ -34,10 +33,10 @@ const HomeContent = () => {
                 sx={{
                   mt: 2,
                   bgcolor: "#3f51b5",
-                  color: "#fff", // Teksti värv valgeks
+                  color: "#fff", 
                   "&:hover": {
-                    bgcolor: "#303f9f", // Hover taust on tumedam sinine
-                    color: "#fff", // Hover ajal teksti värv ei muutu
+                    bgcolor: "#303f9f", 
+                    color: "#fff", 
                   },
                   width: "100%",
                 }}
@@ -62,10 +61,10 @@ const HomeContent = () => {
                 sx={{
                   mt: 2,
                   bgcolor: "#3f51b5",
-                  color: "#fff", // Teksti värv valgeks
+                  color: "#fff", 
                   "&:hover": {
-                    bgcolor: "#303f9f", // Hover taust on tumedam sinine
-                    color: "#fff", // Hover ajal teksti värv ei muutu
+                    bgcolor: "#303f9f", 
+                    color: "#fff", 
                   },
                   width: "100%",
                 }}
