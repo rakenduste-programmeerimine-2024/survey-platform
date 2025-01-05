@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Grid, Typography } from "@mui/material";
 import TeamCard from "@/components/about/TeamCard";
 
+
 const Meist = () => {
   return (
     <Container>
@@ -13,13 +14,16 @@ const Meist = () => {
       </Typography>
       <Grid container spacing={4} justifyContent="center">
         <Grid item xs={12} sm={6} md={4}>
-          <TeamCard name="Marta Männik" role="Projektijuht" />
+          <TeamCard name="Kaspar Merisalu" role="Arendaja" />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <TeamCard name="Kalle Kõiv" role="Arendaja" />
+          <TeamCard name="Hannes Väster" role="Arendaja" />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <TeamCard name="Laura Lepp" role="Disainer" />
+          <TeamCard name="Eric Brück" role="Arendaja" />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <TeamCard name="Madis Valliste" role="Arendaja" />
         </Grid>
       </Grid>
     </Container>
