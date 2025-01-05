@@ -45,11 +45,8 @@ export default function RootLayout({
                 </div>
 
                 <div className="flex items-center gap-5">
-                  <Link
-                    href="/meist"
-                    className="text-sm font-medium hover:underline"
-                  >
-                    Meist
+                  <Link href="/meist" className="text-sm font-medium hover:underline">
+                  Meist
                   </Link>
                   <Link
                     href="/kontakt"
