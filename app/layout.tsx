@@ -49,8 +49,7 @@ export default function RootLayout({
                   Meist
                   </Link>
                   <Link
-                    href="/kontakt"
-                    className="text-sm font-medium hover:underline"
+                    href="/kontakt" className="text-sm font-medium hover:underline"
                   >
                     Kontakt
                   </Link>
