@@ -58,10 +58,10 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-gray-100">
+    <div className="w-full h-screen flex items-center justify-center bg-black-100">
       <form className="flex flex-col w-full max-w-sm mx-auto p-6 bg-white shadow-md rounded-lg">
         <h1 className="text-2xl font-semibold text-center">Sign up</h1>
-        <p className="text-sm text-center text-gray-500 mt-2">
+        <p className="text-sm text-center text-red-500 mt-2">
           Already have an account?{" "}
           <Link className="text-blue-500 font-medium underline" href="/sign-in">
             Sign in
