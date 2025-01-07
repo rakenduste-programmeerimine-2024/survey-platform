@@ -60,7 +60,7 @@ export default function SignupPage() {
   return (
     <div className="w-full h-screen flex items-center justify-center bg-black-100">
       <form className="flex flex-col w-full max-w-sm mx-auto p-6 bg-white shadow-md rounded-lg">
-        <h1 className="text-2xl font-semibold text-center">Sign up</h1>
+        <h1 className="text-2xl font-semibold text-center text-black">Sign up</h1>
         <p className="text-sm text-center text-red-500 mt-2">
           Already have an account?{" "}
           <Link className="text-blue-500 font-medium underline" href="/sign-in">
@@ -71,26 +71,26 @@ export default function SignupPage() {
         <div className="flex flex-col gap-4 mt-6">
           {/* First Name Input */}
           <div>
-            <Label htmlFor="first-name">First Name</Label>
+          <Label htmlFor="first-name" className="text-black">First Name</Label>
             <Input id="first-name" name="first-name" placeholder="John" required />
           </div>
 
           {/* Last Name Input */}
           <div>
-            <Label htmlFor="last-name">Last Name</Label>
-            <Input id="last-name" name="last-name" placeholder="Doe" required />
+          <Label htmlFor="last-name" className="text-black">Last Name</Label>
+          <Input id="last-name" name="last-name" placeholder="Doe" required />
           </div>
 
           {/* Email Input */}
           <div>
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" name="email" type="email" placeholder="you@example.com" required />
+          <Label htmlFor="email" className="text-black">Email</Label>
+          <Input id="email" name="email" type="email" placeholder="you@example.com" required />
           </div>
 
           {/* Password Input */}
           <div>
-            <Label htmlFor="password">Password</Label>
-            <Input
+          <Label htmlFor="password" className="text-black">Password</Label>
+          <Input
               id="password"
               type="password"
               name="password"
@@ -116,8 +116,8 @@ export default function SignupPage() {
 
           {/* Password Confirmation Input */}
           <div>
-            <Label htmlFor="password-confirmation">Confirm Password</Label>
-            <Input
+          <Label htmlFor="password-confirmation" className="text-black">Confirm Password</Label>
+          <Input
               id="password-confirmation"
               type="password"
               name="password-confirmation"
