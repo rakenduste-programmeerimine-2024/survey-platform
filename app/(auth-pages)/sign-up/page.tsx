@@ -1,24 +1,24 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation"; // Import the hook
 import { signUpAction } from "@/app/actions";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
-interface SignupPageProps {
-  searchParams: { success?: string; error?: string } | null;
-}
-
-export default function SignupPage({ searchParams }: SignupPageProps) {
+export default function SignupPage() {
+  const searchParams = useSearchParams(); // Use the hook to access query parameters
   const [message, setMessage] = useState<{ success?: string; error?: string } | null>(null);
   const [passwordStrength, setPasswordStrength] = useState<string | null>(null);
 
-  // Update message state based on searchParams
+  // Extract parameters safely
   useEffect(() => {
     if (searchParams) {
-      setMessage(searchParams);
+      const success = searchParams.get("success");
+      const error = searchParams.get("error");
+      setMessage({ success: success || undefined, error: error || undefined });
     }
   }, [searchParams]);
 
