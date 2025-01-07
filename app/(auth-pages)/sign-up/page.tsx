@@ -8,11 +8,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
+// Main Signup Page Component
 export default function SignupPage() {
   const searchParams = useSearchParams();
   const [message, setMessage] = useState<{ success?: string; error?: string } | null>(null);
   const [passwordStrength, setPasswordStrength] = useState<string | null>(null);
+  const [password, setPassword] = useState<string>("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
+  const [isPasswordMatch, setIsPasswordMatch] = useState<boolean | null>(null);
 
+  // UseEffect for handling searchParams and setting messages
   useEffect(() => {
     if (searchParams) {
       const success = searchParams.get("success");
@@ -21,13 +26,34 @@ export default function SignupPage() {
     }
   }, [searchParams]);
 
+  // Handle Password Strength Indicator
   const handlePasswordChange = (password: string) => {
+    setPassword(password);
     if (password.length < 6) {
       setPasswordStrength("Weak");
     } else if (password.length < 10) {
       setPasswordStrength("Medium");
     } else {
       setPasswordStrength("Strong");
+    }
+
+    // Check if password matches the confirmation
+    if (passwordConfirmation && password !== passwordConfirmation) {
+      setIsPasswordMatch(false);
+    } else {
+      setIsPasswordMatch(true);
+    }
+  };
+
+  // Handle Password Confirmation Change
+  const handlePasswordConfirmationChange = (confirmation: string) => {
+    setPasswordConfirmation(confirmation);
+
+    // Check if password matches the confirmation
+    if (password && password !== confirmation) {
+      setIsPasswordMatch(false);
+    } else {
+      setIsPasswordMatch(true);
     }
   };
 
@@ -43,17 +69,25 @@ export default function SignupPage() {
         </p>
 
         <div className="flex flex-col gap-4 mt-6">
+          {/* First Name Input */}
           <div>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="you@example.com"
-              required
-            />
+            <Label htmlFor="first-name">First Name</Label>
+            <Input id="first-name" name="first-name" placeholder="John" required />
           </div>
 
+          {/* Last Name Input */}
+          <div>
+            <Label htmlFor="last-name">Last Name</Label>
+            <Input id="last-name" name="last-name" placeholder="Doe" required />
+          </div>
+
+          {/* Email Input */}
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+
+          {/* Password Input */}
           <div>
             <Label htmlFor="password">Password</Label>
             <Input
@@ -80,10 +114,29 @@ export default function SignupPage() {
             )}
           </div>
 
+          {/* Password Confirmation Input */}
+          <div>
+            <Label htmlFor="password-confirmation">Confirm Password</Label>
+            <Input
+              id="password-confirmation"
+              type="password"
+              name="password-confirmation"
+              placeholder="Confirm your password"
+              minLength={6}
+              required
+              onChange={(e) => handlePasswordConfirmationChange(e.target.value)}
+            />
+            {isPasswordMatch !== null && !isPasswordMatch && (
+              <p className="text-red-500 text-sm mt-1">Passwords do not match!</p>
+            )}
+          </div>
+
+          {/* Submit Button */}
           <SubmitButton formAction={signUpAction} pendingText="Signing up...">
             Sign up
           </SubmitButton>
 
+          {/* Message Display */}
           {message?.success && (
             <div className="text-green-500 border-l-2 border-green-500 px-4 mt-4">
               {message.success}
