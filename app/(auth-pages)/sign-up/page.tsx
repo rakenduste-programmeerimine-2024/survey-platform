@@ -9,11 +9,10 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
 export default function SignupPage() {
-  const searchParams = useSearchParams(); // Use the hook to access query parameters
+  const searchParams = useSearchParams();
   const [message, setMessage] = useState<{ success?: string; error?: string } | null>(null);
   const [passwordStrength, setPasswordStrength] = useState<string | null>(null);
 
-  // Extract parameters safely
   useEffect(() => {
     if (searchParams) {
       const success = searchParams.get("success");
@@ -22,7 +21,6 @@ export default function SignupPage() {
     }
   }, [searchParams]);
 
-  // Determine password strength
   const handlePasswordChange = (password: string) => {
     if (password.length < 6) {
       setPasswordStrength("Weak");
@@ -45,7 +43,6 @@ export default function SignupPage() {
         </p>
 
         <div className="flex flex-col gap-4 mt-6">
-          {/* Email Input */}
           <div>
             <Label htmlFor="email">Email</Label>
             <Input
@@ -57,7 +54,6 @@ export default function SignupPage() {
             />
           </div>
 
-          {/* Password Input */}
           <div>
             <Label htmlFor="password">Password</Label>
             <Input
@@ -84,12 +80,10 @@ export default function SignupPage() {
             )}
           </div>
 
-          {/* Submit Button */}
           <SubmitButton formAction={signUpAction} pendingText="Signing up...">
             Sign up
           </SubmitButton>
 
-          {/* Message Display */}
           {message?.success && (
             <div className="text-green-500 border-l-2 border-green-500 px-4 mt-4">
               {message.success}
