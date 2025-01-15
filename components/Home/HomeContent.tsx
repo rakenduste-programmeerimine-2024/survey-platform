@@ -54,6 +54,7 @@ const HomeContent = () => {
         <Grid item xs={12} sm={6} md={4}>
           <Card sx={{ boxShadow: 3, borderRadius: 2, bgcolor: "#f7f7f7" }}>
             <CardContent sx={{ textAlign: "center" }}>
+            <Link href="/loo_kusitlus" passHref>
               <Typography variant="h6" sx={{ fontWeight: 600 }}>
                 Loo küsitlus
               </Typography>
@@ -75,6 +76,7 @@ const HomeContent = () => {
               >
                 Alusta
               </Button>
+              </Link>
             </CardContent>
           </Card>
         </Grid>
