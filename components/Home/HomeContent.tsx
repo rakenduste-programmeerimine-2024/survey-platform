@@ -84,6 +84,7 @@ const HomeContent = () => {
         <Grid item xs={12} sm={6} md={4}>
           <Card sx={{ boxShadow: 3, borderRadius: 2, bgcolor: "#f7f7f7" }}>
             <CardContent sx={{ textAlign: "center" }}>
+            <Link href="/vaata_kusitlusi" passHref>
               <Typography variant="h6" sx={{ fontWeight: 600 }}>
                 Vaata tulemusi
               </Typography>
@@ -105,6 +106,7 @@ const HomeContent = () => {
               >
                 Vaata tulemusi
               </Button>
+              </Link>
             </CardContent>
           </Card>
         </Grid>
@@ -114,3 +116,4 @@ const HomeContent = () => {
 };
 
 export default HomeContent;
+
