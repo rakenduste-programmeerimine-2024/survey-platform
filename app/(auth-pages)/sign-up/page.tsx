@@ -17,7 +17,8 @@ export default function SignupPage() {
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
   const [isPasswordMatch, setIsPasswordMatch] = useState<boolean | null>(null);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  
+  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState<boolean>(false);
+
  
 
   // UseEffect for handling searchParams and setting messages
