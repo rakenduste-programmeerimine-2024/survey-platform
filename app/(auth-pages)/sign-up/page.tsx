@@ -16,6 +16,8 @@ export default function SignupPage() {
   const [password, setPassword] = useState<string>("");
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
   const [isPasswordMatch, setIsPasswordMatch] = useState<boolean | null>(null);
+  const [showPassword, setShowPassword] = useState<boolean>(false); // State for password visibility
+  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState<boolean>(false); // State for confirmation visibility
 
   // UseEffect for handling searchParams and setting messages
   useEffect(() => {
@@ -71,34 +73,49 @@ export default function SignupPage() {
         <div className="flex flex-col gap-4 mt-6">
           {/* First Name Input */}
           <div>
-          <Label htmlFor="first-name" className="text-black">First Name</Label>
+            <Label htmlFor="first-name" className="text-black">
+              First Name
+            </Label>
             <Input id="first-name" name="first-name" placeholder="John" required />
           </div>
 
           {/* Last Name Input */}
           <div>
-          <Label htmlFor="last-name" className="text-black">Last Name</Label>
-          <Input id="last-name" name="last-name" placeholder="Doe" required />
+            <Label htmlFor="last-name" className="text-black">
+              Last Name
+            </Label>
+            <Input id="last-name" name="last-name" placeholder="Doe" required />
           </div>
 
           {/* Email Input */}
           <div>
-          <Label htmlFor="email" className="text-black">Email</Label>
-          <Input id="email" name="email" type="email" placeholder="you@example.com" required />
+            <Label htmlFor="email" className="text-black">
+              Email
+            </Label>
+            <Input id="email" name="email" type="email" placeholder="you@example.com" required />
           </div>
 
           {/* Password Input */}
           <div>
-          <Label htmlFor="password" className="text-black">Password</Label>
-          <Input
+            <Label htmlFor="password" className="text-black">
+              Password
+            </Label>
+            <Input
               id="password"
-              type="password"
+              type={showPassword ? "text" : "password"} // Toggle visibility
               name="password"
               placeholder="Your password"
               minLength={6}
               required
               onChange={(e) => handlePasswordChange(e.target.value)}
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="text-sm text-blue-500 mt-1"
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
             {passwordStrength && (
               <p
                 className={`text-sm mt-1 ${
@@ -116,16 +133,25 @@ export default function SignupPage() {
 
           {/* Password Confirmation Input */}
           <div>
-          <Label htmlFor="password-confirmation" className="text-black">Confirm Password</Label>
-          <Input
+            <Label htmlFor="password-confirmation" className="text-black">
+              Confirm Password
+            </Label>
+            <Input
               id="password-confirmation"
-              type="password"
+              type={showPasswordConfirmation ? "text" : "password"} // Toggle visibility
               name="password-confirmation"
               placeholder="Confirm your password"
               minLength={6}
               required
               onChange={(e) => handlePasswordConfirmationChange(e.target.value)}
             />
+            <button
+              type="button"
+              onClick={() => setShowPasswordConfirmation((prev) => !prev)}
+              className="text-sm text-blue-500 mt-1"
+            >
+              {showPasswordConfirmation ? "Hide" : "Show"}
+            </button>
             {isPasswordMatch !== null && !isPasswordMatch && (
               <p className="text-red-500 text-sm mt-1">Passwords do not match!</p>
             )}
