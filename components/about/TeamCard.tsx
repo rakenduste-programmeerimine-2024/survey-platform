@@ -10,7 +10,7 @@ const TeamCard = ({ name, role }: { name: string; role: string }) => {
       },
       transition: "all 0.3s ease",
     }}>
-      <CardContent>
+      <CardContent sx={{ textAlign: "center" }}>
         <Typography variant="h6" fontWeight="bold">
           {name}
         </Typography>
