@@ -14,16 +14,16 @@ const Meist = () => {
       </Typography>
       <Grid container spacing={4} justifyContent="center">
         <Grid item xs={12} sm={6} md={4}>
-          <TeamCard name="Kaspar Merisalu" role="Arendaja" />
+          <TeamCard name="Kaspar Merisalu" role="Arendaja" imageSrc="https://via.placeholder.com/150"/>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <TeamCard name="Hannes Väster" role="Arendaja" />
+          <TeamCard name="Hannes Väster" role="Arendaja" imageSrc="https://via.placeholder.com/150"/>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <TeamCard name="Eric Brück" role="Arendaja" />
+          <TeamCard name="Eric Brück" role="Arendaja" imageSrc="https://via.placeholder.com/150"/>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <TeamCard name="Madis Valliste" role="Arendaja" />
+          <TeamCard name="Madis Valliste" role="Arendaja" imageSrc="https://via.placeholder.com/150"/>
         </Grid>
       </Grid>
     </Container>
