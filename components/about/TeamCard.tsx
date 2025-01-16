@@ -1,7 +1,7 @@
 import React from "react";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography, Avatar} from "@mui/material";
 
-const TeamCard = ({ name, role }: { name: string; role: string }) => {
+const TeamCard = ({ name, role, imageSrc }: { name: string; role: string; imageSrc: string;}) => {
   return (
     <Card sx={{ boxShadow: 3, borderRadius: 2, mb: 2, bgcolor: "#f5f5f5",
       "&:hover": {
@@ -11,6 +11,15 @@ const TeamCard = ({ name, role }: { name: string; role: string }) => {
       transition: "all 0.3s ease",
     }}>
       <CardContent sx={{ textAlign: "center" }}>
+        <Avatar
+          src={imageSrc}
+          alt={name}
+          sx={{
+            width: 80,
+            height: 80,
+            margin: "0 auto 16px auto",
+          }}
+        />
         <Typography variant="h6" fontWeight="bold">
           {name}
         </Typography>
