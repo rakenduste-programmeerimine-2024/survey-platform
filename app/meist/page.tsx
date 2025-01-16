@@ -5,7 +5,7 @@ import TeamCard from "@/components/about/TeamCard";
 
 const Meist = () => {
   return (
-    <Container>
+    <Container sx={{ py: 6, bgcolor: "#e3f2fd", borderRadius: 3, boxShadow: 3,}}>
       <Typography variant="h4" sx={{ textAlign: "center", my: 4 }}>
         Meist
       </Typography>
