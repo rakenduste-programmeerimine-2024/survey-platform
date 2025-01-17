@@ -20,8 +20,6 @@ const loo_kusitlus = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [question, setQuestion] = useState({ text: "", maxAnswers: 1 });
-
-  // Handle change in title and description
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
@@ -32,26 +30,22 @@ const loo_kusitlus = () => {
     setDescription(event.target.value);
   };
 
-  // Handle question text change
   const handleQuestionChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setQuestion({ ...question, text: event.target.value });
   };
 
-  // Handle max answers change
   const handleMaxAnswersChange = (
     event: SelectChangeEvent<number>
   ) => {
     setQuestion({ ...question, maxAnswers: event.target.value as number });
   };
 
-  // Handle form submission
   const handleSubmit = () => {
     console.log("Küsitluse pealkiri:", title);
     console.log("Küsitluse kirjeldus:", description);
     console.log("Küsimus:", question);
-    // Siin saad andmed saata oma serverisse või API-le
   };
 
   return (
@@ -60,7 +54,6 @@ const loo_kusitlus = () => {
         Siin lehel saad luua oma küsitluse
       </Typography>
 
-      {/* Survey Title */}
       <TextField
         label="Küsitluse pealkiri"
         fullWidth
@@ -71,11 +64,10 @@ const loo_kusitlus = () => {
           mb: 3,
           backgroundColor: "#fff",
           color: "#000",
-          borderRadius: 0, // Remove rounded edges
+          borderRadius: 0,
         }}
       />
 
-      {/* Survey Description */}
       <TextField
         label="Küsitluse kirjeldus"
         fullWidth
@@ -88,11 +80,10 @@ const loo_kusitlus = () => {
           mb: 3,
           backgroundColor: "#fff",
           color: "#000",
-          borderRadius: 0, // Remove rounded edges
+          borderRadius: 0,
         }}
       />
 
-      {/* Question */}
       <Typography variant="h6" sx={{ mb: 2 }}>
         Küsimus:
       </Typography>
@@ -100,7 +91,6 @@ const loo_kusitlus = () => {
       <Box sx={{ mb: 2 }}>
         <Card variant="outlined" sx={{ borderRadius: 0 }}>
           <CardContent>
-            {/* Question Text Input */}
             <TextField
               label="Küsimus"
               fullWidth
@@ -111,7 +101,7 @@ const loo_kusitlus = () => {
                 mb: 2,
                 backgroundColor: "#fff",
                 color: "#000",
-                borderRadius: 0, // Remove rounded edges
+                borderRadius: 0,
               }}
               placeholder="Sisesta küsimus"
               InputProps={{
@@ -119,7 +109,6 @@ const loo_kusitlus = () => {
               }}
             />
 
-            {/* Max Answers */}
             <FormControl fullWidth sx={{ mb: 2 }}>
               <InputLabel>Lubatud vastuste arv</InputLabel>
               <Select
@@ -138,7 +127,6 @@ const loo_kusitlus = () => {
         </Card>
       </Box>
 
-      {/* Submit Button */}
       <Box sx={{ textAlign: "center" }}>
         <Button
           variant="contained"
