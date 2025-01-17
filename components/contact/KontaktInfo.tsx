@@ -5,7 +5,8 @@ import PhoneIcon from "@mui/icons-material/Phone";
 
 const KontaktInfo = () => {
   return (
-    <Box sx={{ textAlign: "center", mt: 4, p: 4, bgcolor: "#f5f5f5", boxShadow: 3, 
+    <Box sx={{ textAlign: "center", mt: 4, p: 4, bgcolor: "linear-gradient(135deg, #e3f2fd, #f5f5f5)",
+      boxShadow: 3, 
       borderRadius: 2, 
       maxWidth: 400, 
       mx: "auto"
