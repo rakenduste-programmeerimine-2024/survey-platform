@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Divider } from "@mui/material";
 
 const KontaktInfo = () => {
   return (
@@ -11,6 +11,15 @@ const KontaktInfo = () => {
       <Typography variant="h6" gutterBottom>
         Võta meiega ühendust
       </Typography>
+      <Divider
+        sx={{
+          bgcolor: "#3f51b5",
+          height: 2,
+          width: "20%",
+          mx: "auto",
+          mb: 2,
+        }}
+      />
       <Typography variant="body1">
         Email: GuestR@mail.com
       </Typography>
