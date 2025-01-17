@@ -13,6 +13,7 @@ import {
   Select,
   InputLabel,
   FormControl,
+  SelectChangeEvent,
 } from "@mui/material";
 
 const loo_kusitlus = () => {
@@ -40,7 +41,7 @@ const loo_kusitlus = () => {
 
   // Handle max answers change
   const handleMaxAnswersChange = (
-    event: React.ChangeEvent<{ value: unknown }>
+    event: SelectChangeEvent<number>
   ) => {
     setQuestion({ ...question, maxAnswers: event.target.value as number });
   };
