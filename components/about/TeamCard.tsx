@@ -10,16 +10,7 @@ const TeamCard = ({ name, role, imageSrc }: { name: string; role: string; imageS
       },
       transition: "all 0.3s ease",
     }}>
-      <CardContent sx={{ textAlign: "center" }}>
-        <Avatar
-          src={imageSrc}
-          alt={name}
-          sx={{
-            width: 80,
-            height: 80,
-            margin: "0 auto 16px auto",
-          }}
-        />
+
         <Typography variant="h6" fontWeight="bold">
           {name}
         </Typography>

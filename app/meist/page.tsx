@@ -20,7 +20,8 @@ const Meist = () => {
           <TeamCard name="Hannes Väster" role="Arendaja" imageSrc="https://via.placeholder.com/150"/>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <TeamCard name="Eric Brück" role="Arendaja" imageSrc="https://via.placeholder.com/150"/>
+
+          <TeamCard name="Erik Brück" role="Arendaja" />
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <TeamCard name="Madis Valliste" role="Arendaja" imageSrc="https://via.placeholder.com/150"/>
