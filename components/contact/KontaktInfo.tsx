@@ -1,5 +1,7 @@
 import React from "react";
 import { Box, Typography, Divider } from "@mui/material";
+import EmailIcon from "@mui/icons-material/Email";
+
 
 const KontaktInfo = () => {
   return (
@@ -20,9 +22,10 @@ const KontaktInfo = () => {
           mb: 2,
         }}
       />
-      <Typography variant="body1">
-        Email: GuestR@mail.com
-      </Typography>
+      <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 1 }}>
+        <EmailIcon sx={{ color: "#3f51b5", mr: 1 }} />
+        <Typography variant="body1">GuestR@mail.com</Typography>
+      </Box>
       <Typography variant="body1">
         Telefon: +372 5555 5555
       </Typography>
