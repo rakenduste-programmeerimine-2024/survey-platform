@@ -67,7 +67,12 @@ const loo_kusitlus = () => {
         variant="outlined"
         value={title}
         onChange={handleTitleChange}
-        sx={{ mb: 3 }}
+        sx={{
+          mb: 3,
+          backgroundColor: "#fff",
+          color: "#000",
+          borderRadius: 0, // Remove rounded edges
+        }}
       />
 
       {/* Survey Description */}
@@ -79,7 +84,12 @@ const loo_kusitlus = () => {
         rows={4}
         value={description}
         onChange={handleDescriptionChange}
-        sx={{ mb: 3 }}
+        sx={{
+          mb: 3,
+          backgroundColor: "#fff",
+          color: "#000",
+          borderRadius: 0, // Remove rounded edges
+        }}
       />
 
       {/* Question */}
@@ -88,7 +98,7 @@ const loo_kusitlus = () => {
       </Typography>
 
       <Box sx={{ mb: 2 }}>
-        <Card variant="outlined">
+        <Card variant="outlined" sx={{ borderRadius: 0 }}>
           <CardContent>
             {/* Question Text Input */}
             <TextField
@@ -97,7 +107,12 @@ const loo_kusitlus = () => {
               variant="outlined"
               value={question.text}
               onChange={handleQuestionChange}
-              sx={{ mb: 2 }}
+              sx={{
+                mb: 2,
+                backgroundColor: "#fff",
+                color: "#000",
+                borderRadius: 0, // Remove rounded edges
+              }}
               placeholder="Sisesta küsimus"
               InputProps={{
                 style: { backgroundColor: "#fff", cursor: "pointer" },
