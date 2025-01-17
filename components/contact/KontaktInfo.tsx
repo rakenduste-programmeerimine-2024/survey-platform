@@ -3,7 +3,11 @@ import { Box, Typography } from "@mui/material";
 
 const KontaktInfo = () => {
   return (
-    <Box sx={{ textAlign: "center", mt: 4 }}>
+    <Box sx={{ textAlign: "center", mt: 4, p: 4, bgcolor: "#f5f5f5", boxShadow: 3, 
+      borderRadius: 2, 
+      maxWidth: 400, 
+      mx: "auto"
+      }}>
       <Typography variant="h6" gutterBottom>
         Võta meiega ühendust
       </Typography>
