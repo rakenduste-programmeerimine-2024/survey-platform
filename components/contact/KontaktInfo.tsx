@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Divider } from "@mui/material";
+import { Box, Typography, Divider, Button} from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 
@@ -31,6 +31,25 @@ const KontaktInfo = () => {
         <PhoneIcon sx={{ color: "#3f51b5", mr: 1 }} />
         <Typography variant="body1">+372 5555 5555</Typography>
       </Box>
+      <Button
+        variant="contained"
+        startIcon={<EmailIcon />}
+        sx={{
+          mt: 2,
+          bgcolor: "primary.main",
+          color: "#fff",
+          textTransform: "none",
+          fontWeight: "bold",
+          "&:hover": {
+            bgcolor: "primary.dark",
+          },
+          px: 4,
+          py: 1.5,
+          borderRadius: 2,
+        }}
+      >
+        Kirjuta meile
+      </Button>
     </Box>
   );
 };
