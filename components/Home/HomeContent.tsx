@@ -15,12 +15,9 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 
 const HomeContent = () => {
   return (
-    <Container sx={{ mt: 4, py: 6, px: 3,
-      backgroundImage: "url('/background.jpg')", 
-      backgroundSize: "cover", 
-      backgroundPosition: "center",
-      borderRadius: 2, 
-      boxShadow: 3,
+    <Container sx={{mt: 4, p: 4, borderRadius: 2,
+      background: "linear-gradient(to right, #f3f4f6, #e3e6ea)",
+      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
     }}
     >
       <Typography variant="h4" gutterBottom sx={{ textAlign: "center", fontWeight: 600 }}>

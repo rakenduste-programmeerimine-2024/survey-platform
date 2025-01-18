@@ -59,6 +59,15 @@
   }
 }
 
+body {
+  background-image: url('/background.jpg');
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+
 @layer base {
   * {
     @apply border-border;
