@@ -110,11 +110,11 @@ const loo_kusitlus = () => {
             />
 
             <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel>Lubatud vastuste arv</InputLabel>
+              <InputLabel>Vastuste arv</InputLabel>
               <Select
                 value={question.maxAnswers}
                 onChange={handleMaxAnswersChange}
-                label="Lubatud vastuste arv"
+                label="Vastuste arv"
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((number) => (
                   <MenuItem key={number} value={number}>
