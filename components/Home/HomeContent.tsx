@@ -8,6 +8,9 @@ import {
   Button,
 } from "@mui/material";
 import Link from "next/link";
+import SearchIcon from "@mui/icons-material/Search";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import BarChartIcon from "@mui/icons-material/BarChart";
 
 
 const HomeContent = () => {
@@ -43,13 +46,15 @@ const HomeContent = () => {
               </Typography>
               <Button
                 variant="contained"
+                startIcon={<AddCircleOutlineIcon />}
                 sx={{
                   mt: 2,
                   bgcolor: "#3f51b5",
-                  color: "#fff", 
+                  color: "#fff",
+                  fontWeight: 600,
                   "&:hover": {
-                    bgcolor: "#303f9f", 
-                    color: "#fff", 
+                    bgcolor: "#303f9f",
+                    color: "#fff",
                   },
                   width: "100%",
                 }}
@@ -79,10 +84,12 @@ const HomeContent = () => {
               </Typography>
               <Button
                 variant="contained"
+                startIcon={<BarChartIcon />}
                 sx={{
                   mt: 2,
                   bgcolor: "#3f51b5",
                   color: "#fff", 
+                  fontWeight: 600,
                   "&:hover": {
                     bgcolor: "#303f9f", 
                     color: "#fff", 
@@ -115,13 +122,15 @@ const HomeContent = () => {
               </Typography>
               <Button
                 variant="contained"
+                startIcon={<SearchIcon />}
                 sx={{
                   mt: 2,
                   bgcolor: "#3f51b5",
-                  color: "#fff", 
+                  color: "#fff",
+                  fontWeight: 600,
                   "&:hover": {
-                    bgcolor: "#303f9f", 
-                    color: "#fff", 
+                    bgcolor: "#303f9f",
+                    color: "#fff",
                   },
                   width: "100%",
                 }}
