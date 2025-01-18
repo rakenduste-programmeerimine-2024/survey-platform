@@ -36,12 +36,12 @@ const KontaktInfo = () => {
         startIcon={<EmailIcon />}
         sx={{
           mt: 2,
-          bgcolor: "primary.main",
-          color: "#fff",
+          bgcolor: "#3f51b5 !important",
+          color: "#fff !important",
           textTransform: "none",
           fontWeight: "bold",
           "&:hover": {
-            bgcolor: "primary.dark",
+            bgcolor: "#303f9f !important",
           },
           px: 4,
           py: 1.5,
