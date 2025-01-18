@@ -26,7 +26,13 @@ const HomeContent = () => {
       
       <Grid container spacing={4} justifyContent="center">
         <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ boxShadow: 3, borderRadius: 2, bgcolor: "#f7f7f7" }}>
+          <Card sx={{ boxShadow: 3, borderRadius: 2, bgcolor: "#ffffff", border: "1px solid #e0e0e0",
+            transition: "transform 0.3s, box-shadow 0.3s", 
+              "&:hover": {
+            transform: "scale(1.05)",
+            boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
+              },
+          }}>
             <CardContent sx={{ textAlign: "center" }}>
             <Link href="/vaata_kusitlusi" passHref>
               <Typography variant="h6" sx={{ fontWeight: 600 }}>
@@ -56,7 +62,13 @@ const HomeContent = () => {
         </Grid>
         
         <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ boxShadow: 3, borderRadius: 2, bgcolor: "#f7f7f7" }}>
+          <Card sx={{ boxShadow: 3, borderRadius: 2, bgcolor: "#ffffff", border: "1px solid #e0e0e0",
+            transition: "transform 0.3s, box-shadow 0.3s", 
+              "&:hover": {
+            transform: "scale(1.05)",
+            boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
+              },
+          }}>
             <CardContent sx={{ textAlign: "center" }}>
             <Link href="/loo_kusitlus" passHref>
               <Typography variant="h6" sx={{ fontWeight: 600 }}>
@@ -86,7 +98,13 @@ const HomeContent = () => {
         </Grid>
 
         <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ boxShadow: 3, borderRadius: 2, bgcolor: "#f7f7f7" }}>
+          <Card sx={{ boxShadow: 3, borderRadius: 2, bgcolor: "#ffffff", border: "1px solid #e0e0e0",
+            transition: "transform 0.3s, box-shadow 0.3s", 
+              "&:hover": {
+            transform: "scale(1.05)",
+            boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
+              },
+          }}>
             <CardContent sx={{ textAlign: "center" }}>
               <Link href="/vaata_tulemusi" passHref>
               <Typography variant="h6" sx={{ fontWeight: 600 }}>
