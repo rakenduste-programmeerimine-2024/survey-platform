@@ -35,10 +35,10 @@ const HomeContent = () => {
           }}>
             <CardContent sx={{ textAlign: "center" }}>
             <Link href="/vaata_kusitlusi" passHref>
-              <Typography variant="h6" sx={{ fontWeight: 600 }}>
+              <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1}}>
                 Vaata küsitlusi
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+              <Typography variant="body2" sx={{ color: "#757575", mb: 2}}>
                 Avasta erivaldkondade küsitlusi mis sulle huvi pakuvad.
               </Typography>
               <Button
@@ -71,10 +71,10 @@ const HomeContent = () => {
           }}>
             <CardContent sx={{ textAlign: "center" }}>
             <Link href="/loo_kusitlus" passHref>
-              <Typography variant="h6" sx={{ fontWeight: 600 }}>
+              <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1}}>
                 Loo küsitlus
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+              <Typography variant="body2" sx={{ color: "#757575", mb: 2}}>
                 Registreeru ja alusta oma küsitluste loomist.
               </Typography>
               <Button
@@ -107,10 +107,10 @@ const HomeContent = () => {
           }}>
             <CardContent sx={{ textAlign: "center" }}>
               <Link href="/vaata_tulemusi" passHref>
-              <Typography variant="h6" sx={{ fontWeight: 600 }}>
+              <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1}}>
                 Vaata tulemusi
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+              <Typography variant="body2" sx={{ color: "#757575", mb: 2}}>
                 Analüüsi küsitluse vastusi erinevate diagrammidega.
               </Typography>
               <Button
