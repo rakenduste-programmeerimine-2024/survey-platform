@@ -49,12 +49,12 @@ const HomeContent = () => {
                 startIcon={<AddCircleOutlineIcon />}
                 sx={{
                   mt: 2,
-                  bgcolor: "#3f51b5",
-                  color: "#fff",
+                  bgcolor: "#3f51b5 !important",
+                  color: "#fff !important",
                   fontWeight: 600,
                   "&:hover": {
-                    bgcolor: "#303f9f",
-                    color: "#fff",
+                    bgcolor: "#303f9f !important",
+                    color: "#fff !important",
                   },
                   width: "100%",
                 }}
@@ -87,12 +87,12 @@ const HomeContent = () => {
                 startIcon={<BarChartIcon />}
                 sx={{
                   mt: 2,
-                  bgcolor: "#3f51b5",
-                  color: "#fff", 
+                  bgcolor: "#3f51b5 !important",
+                  color: "#fff !important", 
                   fontWeight: 600,
                   "&:hover": {
-                    bgcolor: "#303f9f", 
-                    color: "#fff", 
+                    bgcolor: "#303f9f !important", 
+                    color: "#fff !important", 
                   },
                   width: "100%",
                 }}
@@ -125,12 +125,12 @@ const HomeContent = () => {
                 startIcon={<SearchIcon />}
                 sx={{
                   mt: 2,
-                  bgcolor: "#3f51b5",
-                  color: "#fff",
+                  bgcolor: "#3f51b5 !important",
+                  color: "#fff !important",
                   fontWeight: 600,
                   "&:hover": {
-                    bgcolor: "#303f9f",
-                    color: "#fff",
+                    bgcolor: "#303f9f !important",
+                    color: "#fff !important",
                   },
                   width: "100%",
                 }}
