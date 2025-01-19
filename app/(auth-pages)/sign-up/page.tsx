@@ -54,7 +54,15 @@ export default function SignupPage() {
       if (error) {
         throw error;
       }
-      
+
+      setSuccess("Registreerimine õnnestus! Kontrollige oma e-posti kinnituse saamiseks.");
+    } catch (err: any) {
+      setError(err.message || "Midagi läks valesti.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   return (
     <div className="w-full h-screen flex items-center justify-center bg-black-100">
       <form className="flex flex-col w-full max-w-sm mx-auto p-6 bg-white shadow-md rounded-lg">
