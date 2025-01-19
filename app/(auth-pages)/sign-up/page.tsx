@@ -1,8 +1,7 @@
 "use client";
 
 import { createClient } from "@supabase/supabase-js";
-import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,14 +31,23 @@ export default function SignupPage() {
     setError(null);
     setSuccess(null);
 
+    // Password validation
     if (password !== passwordConfirmation) {
       setError("Paroolid ei ühti.");
       setLoading(false);
       return;
     }
 
+    // Email validation (simple regex)
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      setError("E-posti aadress ei ole kehtiv.");
+      setLoading(false);
+      return;
+    }
+
     try {
-      console.log("Alustame registreerimist..."); // Algus logi
+      console.log("Alustame registreerimist...");
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -48,11 +56,11 @@ export default function SignupPage() {
             first_name: firstName,
             last_name: lastName,
           },
-          emailRedirectTo: `${window.location.origin}/auth/callback`, // Kinnitamismeili link
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
       });
 
-      console.log("Signup vastus:", { data, error }); // Täiendatud logid
+      console.log("Signup vastus:", { data, error });
 
       if (error) {
         throw error;
