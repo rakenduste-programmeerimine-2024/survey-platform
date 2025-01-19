@@ -8,7 +8,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
-// Main Signup Page Component
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+
+
 export default function SignupPage() {
   const searchParams = useSearchParams();
   const [message, setMessage] = useState<{ success?: string; error?: string } | null>(null);
