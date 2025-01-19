@@ -2,8 +2,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation"; // Import the hook
-import { signUpAction } from "@/app/actions";
+import { useSearchParams } from "next/navigation";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,9 +15,6 @@ if (!supabaseUrl || !supabaseKey) {
 }
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-
-
-// Main Signup Page Component
 export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,8 +39,8 @@ export default function SignupPage() {
     }
 
     try {
-      // Registreeri kasutaja Supabase'i
-      const { error } = await supabase.auth.signUp({
+      console.log("Alustame registreerimist..."); // Algus logi
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -56,13 +52,22 @@ export default function SignupPage() {
         },
       });
 
+      console.log("Signup vastus:", { data, error }); // Täiendatud logid
+
       if (error) {
         throw error;
       }
 
-      setSuccess("Registreerimine õnnestus! Kontrollige oma e-posti kinnituse saamiseks.");
+      if (data.user) {
+        setSuccess("Registreerimine õnnestus! Kontrollige oma e-posti kinnituse saamiseks.");
+        console.log("Kasutaja edukalt registreeritud:", data.user);
+      } else {
+        setError("Kasutaja registreerimisel tekkis ootamatu probleem.");
+        console.error("Andmed puuduvad, ootamatu viga:", data);
+      }
     } catch (err: any) {
       setError(err.message || "Midagi läks valesti.");
+      console.error("Viga registreerimisel:", err);
     } finally {
       setLoading(false);
     }
