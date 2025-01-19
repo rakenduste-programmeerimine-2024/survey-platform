@@ -27,46 +27,6 @@ export default function SignupPage() {
 
  
 
-  // UseEffect for handling searchParams and setting messages
-  useEffect(() => {
-    if (searchParams) {
-      const success = searchParams.get("success");
-      const error = searchParams.get("error");
-      setMessage({ success: success || undefined, error: error || undefined });
-    }
-  }, [searchParams]);
-
-  // Handle Password Strength Indicator
-  const handlePasswordChange = (password: string) => {
-    setPassword(password);
-    if (password.length < 6) {
-      setPasswordStrength("Weak");
-    } else if (password.length < 10) {
-      setPasswordStrength("Medium");
-    } else {
-      setPasswordStrength("Strong");
-    }
-
-    // Check if password matches the confirmation
-    if (passwordConfirmation && password !== passwordConfirmation) {
-      setIsPasswordMatch(false);
-    } else {
-      setIsPasswordMatch(true);
-    }
-  };
-
-  // Handle Password Confirmation Change
-  const handlePasswordConfirmationChange = (confirmation: string) => {
-    setPasswordConfirmation(confirmation);
-
-    // Check if password matches the confirmation
-    if (password && password !== confirmation) {
-      setIsPasswordMatch(false);
-    } else {
-      setIsPasswordMatch(true);
-    }
-  };
-
   return (
     <div className="w-full h-screen flex items-center justify-center bg-black-100">
       <form className="flex flex-col w-full max-w-sm mx-auto p-6 bg-white shadow-md rounded-lg">
