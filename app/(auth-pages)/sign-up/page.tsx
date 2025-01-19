@@ -25,7 +25,11 @@ export default function SignupPage() {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
 
- 
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-black-100">
