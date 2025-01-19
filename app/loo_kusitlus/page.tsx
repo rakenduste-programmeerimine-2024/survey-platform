@@ -98,13 +98,21 @@ const LooKusitlus = () => {
 
   return (
     <Container>
-      <Typography variant="h4">Loo Küsitlus</Typography>
+      <Typography variant="h4" sx={{ mb: 2 }}>
+        Loo Küsitlus
+      </Typography>
       <TextField
         label="Küsitluse Pealkiri"
         fullWidth
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        sx={{ mb: 2 }}
+        sx={{
+          mb: 2,
+          backgroundColor: "white",
+          "& .MuiInputBase-root": {
+            backgroundColor: "white",
+          },
+        }}
       />
       <TextField
         label="Kirjeldus"
@@ -112,29 +120,49 @@ const LooKusitlus = () => {
         multiline
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        sx={{ mb: 2 }}
+        sx={{
+          mb: 2,
+          backgroundColor: "white",
+          "& .MuiInputBase-root": {
+            backgroundColor: "white",
+          },
+        }}
       />
       <TextField
         label="Küsimus"
         fullWidth
         value={questionText}
         onChange={(e) => setQuestionText(e.target.value)}
-        sx={{ mb: 2 }}
+        sx={{
+          mb: 2,
+          backgroundColor: "white",
+          "& .MuiInputBase-root": {
+            backgroundColor: "white",
+          },
+        }}
       />
       <FormControl fullWidth sx={{ mb: 2 }}>
         <InputLabel>Vastuste arv</InputLabel>
         <Select
           value={maxAnswers}
           onChange={(e) => setMaxAnswers(Number(e.target.value))}
+          sx={{
+            backgroundColor: "white",
+            "& .MuiSelect-root": {
+              backgroundColor: "white",
+            },
+          }}
         >
-            {Array.from(Array(9).keys()).map((i) => (
+          {Array.from(Array(9).keys()).map((i) => (
             <MenuItem key={i + 2} value={i + 2}>
               {i + 2}
             </MenuItem>
-            ))}
+          ))}
         </Select>
       </FormControl>
-      <Typography variant="h6">Valikuvõimalused</Typography>
+      <Typography variant="h6" sx={{ mb: 2 }}>
+        Valikuvõimalused
+      </Typography>
       {options.map((option, index) => (
         <Box key={index} display="flex" alignItems="center" sx={{ mb: 1 }}>
           <TextField
@@ -142,20 +170,54 @@ const LooKusitlus = () => {
             value={option}
             onChange={(e) => handleOptionChange(index, e.target.value)}
             placeholder={`Option ${index + 1}`}
+            sx={{
+              backgroundColor: "white",
+              "& .MuiInputBase-root": {
+                backgroundColor: "white",
+              },
+            }}
           />
           <Button
             onClick={() => handleRemoveOption(index)}
             disabled={options.length <= 2}
+            sx={{
+              ml: 1,
+              backgroundColor: "#f44336",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "#d32f2f",
+              },
+            }}
           >
             Remove
           </Button>
         </Box>
       ))}
-      <Button onClick={handleAddOption} disabled={options.length >= 10}>
+      <Button
+        onClick={handleAddOption}
+        disabled={options.length >= 10}
+        sx={{
+          backgroundColor: "#4caf50",
+          color: "white",
+          "&:hover": {
+            backgroundColor: "#388e3c",
+          },
+        }}
+      >
         Add Option
       </Button>
       <Box textAlign="center" sx={{ mt: 4 }}>
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          sx={{
+            backgroundColor: "#1976d2",
+            color: "white",
+            "&:hover": {
+              backgroundColor: "#1565c0",
+            },
+          }}
+        >
           Loo Küsitlus
         </Button>
       </Box>
