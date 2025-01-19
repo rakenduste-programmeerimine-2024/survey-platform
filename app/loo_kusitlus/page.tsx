@@ -7,57 +7,44 @@ import {
   TextField,
   Button,
   Box,
-  Card,
-  CardContent,
-  MenuItem,
-  Select,
-  InputLabel,
   FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import supabase from "../../lib/supabaseClient";
 
 const LooKusitlus = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
   const [questionText, setQuestionText] = useState("");
+  const [description, setDescription] = useState("");
   const [maxAnswers, setMaxAnswers] = useState(2);
-  const [options, setOptions] = useState(["", ""]); // Start with 2 options
+  const [options, setOptions] = useState(Array(2).fill(""));
 
-  interface OptionChangeHandler {
-    (index: number, value: string): void;
-  }
-
-  const handleOptionChange: OptionChangeHandler = (index, value) => {
+  const handleOptionChange = (index: number, value: string) => {
     const updatedOptions = [...options];
     updatedOptions[index] = value;
     setOptions(updatedOptions);
   };
 
   const handleAddOption = () => {
-    if (options.length < 10) {
+    if (options.length < maxAnswers) {
       setOptions([...options, ""]);
     }
   };
 
-  interface RemoveOptionHandler {
-    (index: number): void;
-  }
-
-  const handleRemoveOption: RemoveOptionHandler = (index) => {
+  const handleRemoveOption = (index: number) => {
     setOptions(options.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async () => {
-    // Validate inputs
-    if (!title || !questionText || options.length < 2 || options.some((o) => !o.trim())) {
+    if (!questionText || options.length < 2 || options.some((o) => !o.trim())) {
       alert("Please fill in all fields and ensure at least 2 valid options.");
       return;
     }
 
-    // Insert survey
     const { data: surveyData, error: surveyError } = await supabase
       .from("surveys")
-      .insert([{ title, description }])
+      .insert([{ description }])
       .select("id");
 
     if (surveyError) {
@@ -67,7 +54,6 @@ const LooKusitlus = () => {
 
     const surveyId = surveyData[0].id;
 
-    // Insert question
     const { data: questionData, error: questionError } = await supabase
       .from("questions")
       .insert([{ survey_id: surveyId, text: questionText, max_answers: maxAnswers }])
@@ -80,7 +66,6 @@ const LooKusitlus = () => {
 
     const questionId = questionData[0].id;
 
-    // Insert answer options
     const optionData = options.map((optionText) => ({
       question_id: questionId,
       option_text: optionText,
@@ -101,11 +86,12 @@ const LooKusitlus = () => {
       <Typography variant="h4" sx={{ mb: 2 }}>
         Loo Küsitlus
       </Typography>
+
       <TextField
-        label="Küsitluse Pealkiri"
+        label="Küsimus"
         fullWidth
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        value={questionText}
+        onChange={(e) => setQuestionText(e.target.value)}
         sx={{
           mb: 2,
           backgroundColor: "white",
@@ -114,6 +100,7 @@ const LooKusitlus = () => {
           },
         }}
       />
+
       <TextField
         label="Kirjeldus"
         fullWidth
@@ -128,24 +115,16 @@ const LooKusitlus = () => {
           },
         }}
       />
-      <TextField
-        label="Küsimus"
-        fullWidth
-        value={questionText}
-        onChange={(e) => setQuestionText(e.target.value)}
-        sx={{
-          mb: 2,
-          backgroundColor: "white",
-          "& .MuiInputBase-root": {
-            backgroundColor: "white",
-          },
-        }}
-      />
+
       <FormControl fullWidth sx={{ mb: 2 }}>
         <InputLabel>Vastuste arv</InputLabel>
         <Select
           value={maxAnswers}
-          onChange={(e) => setMaxAnswers(Number(e.target.value))}
+          onChange={(e) => {
+            const newMaxAnswers = Number(e.target.value);
+            setMaxAnswers(newMaxAnswers);
+            setOptions(Array(newMaxAnswers).fill("")); // Reset options to match the selected number
+          }}
           sx={{
             backgroundColor: "white",
             "& .MuiSelect-root": {
@@ -160,9 +139,11 @@ const LooKusitlus = () => {
           ))}
         </Select>
       </FormControl>
+
       <Typography variant="h6" sx={{ mb: 2 }}>
         Valikuvõimalused
       </Typography>
+
       {options.map((option, index) => (
         <Box key={index} display="flex" alignItems="center" sx={{ mb: 1 }}>
           <TextField
@@ -193,19 +174,23 @@ const LooKusitlus = () => {
           </Button>
         </Box>
       ))}
-      <Button
-        onClick={handleAddOption}
-        disabled={options.length >= 10}
-        sx={{
-          backgroundColor: "#4caf50",
-          color: "white",
-          "&:hover": {
-            backgroundColor: "#388e3c",
-          },
-        }}
-      >
-        Add Option
-      </Button>
+
+      {/* Option Add button */}
+      {options.length < maxAnswers && (
+        <Button
+          onClick={handleAddOption}
+          sx={{
+            backgroundColor: "#4caf50",
+            color: "white",
+            "&:hover": {
+              backgroundColor: "#388e3c",
+            },
+          }}
+        >
+          Add Option
+        </Button>
+      )}
+
       <Box textAlign="center" sx={{ mt: 4 }}>
         <Button
           variant="contained"
