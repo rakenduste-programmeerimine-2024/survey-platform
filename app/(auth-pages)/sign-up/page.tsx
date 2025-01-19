@@ -36,7 +36,25 @@ export default function SignupPage() {
       setLoading(false);
       return;
     }
-    
+
+    try {
+      // Registreeri kasutaja Supabase'i
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            first_name: firstName,
+            last_name: lastName,
+          },
+          emailRedirectTo: `${window.location.origin}/auth/callback`, // Kinnitamismeili link
+        },
+      });
+
+      if (error) {
+        throw error;
+      }
+      
   return (
     <div className="w-full h-screen flex items-center justify-center bg-black-100">
       <form className="flex flex-col w-full max-w-sm mx-auto p-6 bg-white shadow-md rounded-lg">
