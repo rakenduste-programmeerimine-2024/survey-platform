@@ -31,6 +31,12 @@ export default function SignupPage() {
     setError(null);
     setSuccess(null);
 
+    if (password !== passwordConfirmation) {
+      setError("Paroolid ei ühti.");
+      setLoading(false);
+      return;
+    }
+    
   return (
     <div className="w-full h-screen flex items-center justify-center bg-black-100">
       <form className="flex flex-col w-full max-w-sm mx-auto p-6 bg-white shadow-md rounded-lg">
