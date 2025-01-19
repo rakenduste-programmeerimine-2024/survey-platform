@@ -9,9 +9,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error("Missing Supabase environment variables!");
+}
 const supabase = createClient(supabaseUrl, supabaseKey);
+
 
 
 // Main Signup Page Component
