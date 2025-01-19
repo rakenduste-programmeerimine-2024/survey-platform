@@ -116,7 +116,7 @@ const LooKusitlus = () => {
         }}
       />
 
-      <FormControl fullWidth sx={{ mb: 2 }}>
+      <FormControl fullWidth sx={{ mb: 2, mt: 2 }}>
         <InputLabel>Vastuste arv</InputLabel>
         <Select
           value={maxAnswers}
