@@ -74,7 +74,12 @@ export default function SignupPage() {
         console.error("Andmed puuduvad, ootamatu viga:", data);
       }
     } catch (err: any) {
-      setError(err.message || "Midagi läks valesti.");
+      // Differentiate error types
+      if (err.message.includes("duplicate key value")) {
+        setError("See e-posti aadress on juba registreeritud.");
+      } else {
+        setError(err.message || "Midagi läks valesti.");
+      }
       console.error("Viga registreerimisel:", err);
     } finally {
       setLoading(false);
@@ -107,6 +112,7 @@ export default function SignupPage() {
               placeholder="John"
               required
               onChange={(e) => setFirstName(e.target.value)}
+              disabled={loading} // Disable input when loading
             />
           </div>
 
@@ -121,6 +127,7 @@ export default function SignupPage() {
               placeholder="Doe"
               required
               onChange={(e) => setLastName(e.target.value)}
+              disabled={loading} // Disable input when loading
             />
           </div>
 
@@ -136,6 +143,7 @@ export default function SignupPage() {
               placeholder="teie@example.com"
               required
               onChange={(e) => setEmail(e.target.value)}
+              disabled={loading} // Disable input when loading
             />
           </div>
 
@@ -152,6 +160,7 @@ export default function SignupPage() {
               minLength={6}
               required
               onChange={(e) => setPassword(e.target.value)}
+              disabled={loading} // Disable input when loading
             />
           </div>
 
@@ -168,6 +177,7 @@ export default function SignupPage() {
               minLength={6}
               required
               onChange={(e) => setPasswordConfirmation(e.target.value)}
+              disabled={loading} // Disable input when loading
             />
           </div>
 
