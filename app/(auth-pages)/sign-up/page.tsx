@@ -1,5 +1,6 @@
 "use client";
 
+import { createClient } from "@supabase/supabase-js";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation"; // Import the hook
 import { signUpAction } from "@/app/actions";
@@ -62,7 +63,7 @@ export default function SignupPage() {
       setLoading(false);
     }
   };
-  
+
   return (
     <div className="w-full h-screen flex items-center justify-center bg-black-100">
       <form className="flex flex-col w-full max-w-sm mx-auto p-6 bg-white shadow-md rounded-lg">
