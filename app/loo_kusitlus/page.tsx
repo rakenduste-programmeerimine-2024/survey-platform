@@ -1,145 +1,161 @@
-import React, { useState } from "react";
-import { Container, Typography, TextField, Button, Box, Card, CardContent, MenuItem, Select, InputLabel, FormControl, SelectChangeEvent } from "@mui/material";
-import supabase from "lib/supabaseClient.ts";
+"use client";
 
-const loo_kusitlus = () => {
+import React, { useState } from "react";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Box,
+  Card,
+  CardContent,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
+import supabase from "../../lib/supabaseClient";
+
+const LooKusitlus = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [question, setQuestion] = useState({ text: "", maxAnswers: 1 });
+  const [questionText, setQuestionText] = useState("");
+  const [maxAnswers, setMaxAnswers] = useState(2);
+  const [options, setOptions] = useState(["", ""]); // Start with 2 options
 
-  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
+  interface OptionChangeHandler {
+    (index: number, value: string): void;
+  }
+
+  const handleOptionChange: OptionChangeHandler = (index, value) => {
+    const updatedOptions = [...options];
+    updatedOptions[index] = value;
+    setOptions(updatedOptions);
   };
 
-  const handleDescriptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDescription(event.target.value);
+  const handleAddOption = () => {
+    if (options.length < 10) {
+      setOptions([...options, ""]);
+    }
   };
 
-  const handleQuestionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuestion({ ...question, text: event.target.value });
-  };
+  interface RemoveOptionHandler {
+    (index: number): void;
+  }
 
-  const handleMaxAnswersChange = (event: SelectChangeEvent<number>) => {
-    setQuestion({ ...question, maxAnswers: event.target.value as number });
+  const handleRemoveOption: RemoveOptionHandler = (index) => {
+    setOptions(options.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async () => {
-    // Insert survey into Supabase
+    // Validate inputs
+    if (!title || !questionText || options.length < 2 || options.some((o) => !o.trim())) {
+      alert("Please fill in all fields and ensure at least 2 valid options.");
+      return;
+    }
+
+    // Insert survey
     const { data: surveyData, error: surveyError } = await supabase
       .from("surveys")
-      .insert([{ title, description }]);
+      .insert([{ title, description }])
+      .select("id");
 
     if (surveyError) {
-      console.error("Error inserting survey:", surveyError.message);
+      console.error("Error creating survey:", surveyError.message);
       return;
     }
 
-    const surveyId = surveyData?.[0]?.id;
+    const surveyId = surveyData[0].id;
 
-    // Insert question into Supabase
+    // Insert question
     const { data: questionData, error: questionError } = await supabase
       .from("questions")
-      .insert([{ survey_id: surveyId, text: question.text, max_answers: question.maxAnswers }]);
+      .insert([{ survey_id: surveyId, text: questionText, max_answers: maxAnswers }])
+      .select("id");
 
     if (questionError) {
-      console.error("Error inserting question:", questionError.message);
+      console.error("Error creating question:", questionError.message);
       return;
     }
 
-    console.log("Survey and question successfully added!");
+    const questionId = questionData[0].id;
+
+    // Insert answer options
+    const optionData = options.map((optionText) => ({
+      question_id: questionId,
+      option_text: optionText,
+    }));
+
+    const { error: optionError } = await supabase.from("answer_options").insert(optionData);
+
+    if (optionError) {
+      console.error("Error creating options:", optionError.message);
+      return;
+    }
+
+    console.log("Survey successfully created!");
   };
 
   return (
-    <Container sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom sx={{ textAlign: "center" }}>
-        Siin lehel saad luua oma küsitluse
-      </Typography>
-
+    <Container>
+      <Typography variant="h4">Loo Küsitlus</Typography>
       <TextField
-        label="Küsitluse pealkiri"
+        label="Küsitluse Pealkiri"
         fullWidth
-        variant="outlined"
         value={title}
-        onChange={handleTitleChange}
-        sx={{
-          mb: 3,
-          backgroundColor: "#fff",
-          color: "#000",
-          borderRadius: 0,
-        }}
+        onChange={(e) => setTitle(e.target.value)}
+        sx={{ mb: 2 }}
       />
-
       <TextField
-        label="Küsitluse kirjeldus"
+        label="Kirjeldus"
         fullWidth
-        variant="outlined"
         multiline
-        rows={4}
         value={description}
-        onChange={handleDescriptionChange}
-        sx={{
-          mb: 3,
-          backgroundColor: "#fff",
-          color: "#000",
-          borderRadius: 0,
-        }}
+        onChange={(e) => setDescription(e.target.value)}
+        sx={{ mb: 2 }}
       />
-
-      <Typography variant="h6" sx={{ mb: 2 }}>
-        Küsimus:
-      </Typography>
-
-      <Box sx={{ mb: 2 }}>
-        <Card variant="outlined" sx={{ borderRadius: 0 }}>
-          <CardContent>
-            <TextField
-              label="Küsimus"
-              fullWidth
-              variant="outlined"
-              value={question.text}
-              onChange={handleQuestionChange}
-              sx={{
-                mb: 2,
-                backgroundColor: "#fff",
-                color: "#000",
-                borderRadius: 0,
-              }}
-              placeholder="Sisesta küsimus"
-              InputProps={{
-                style: { backgroundColor: "#fff", cursor: "pointer" },
-              }}
-            />
-
-            <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel>Vastuste arv</InputLabel>
-              <Select
-                value={question.maxAnswers}
-                onChange={handleMaxAnswersChange}
-                label="Vastuste arv"
-              >
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((number) => (
-                  <MenuItem key={number} value={number}>
-                    {number}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </CardContent>
-        </Card>
-      </Box>
-
-      <Box sx={{ textAlign: "center" }}>
-        <Button
-          variant="contained"
-          sx={{
-            bgcolor: "#3f51b5",
-            color: "#fff",
-            "&:hover": {
-              bgcolor: "#303f9f",
-            },
-          }}
-          onClick={handleSubmit}
+      <TextField
+        label="Küsimus"
+        fullWidth
+        value={questionText}
+        onChange={(e) => setQuestionText(e.target.value)}
+        sx={{ mb: 2 }}
+      />
+      <FormControl fullWidth sx={{ mb: 2 }}>
+        <InputLabel>Vastuste arv</InputLabel>
+        <Select
+          value={maxAnswers}
+          onChange={(e) => setMaxAnswers(Number(e.target.value))}
         >
+            {Array.from(Array(9).keys()).map((i) => (
+            <MenuItem key={i + 2} value={i + 2}>
+              {i + 2}
+            </MenuItem>
+            ))}
+        </Select>
+      </FormControl>
+      <Typography variant="h6">Valikuvõimalused</Typography>
+      {options.map((option, index) => (
+        <Box key={index} display="flex" alignItems="center" sx={{ mb: 1 }}>
+          <TextField
+            fullWidth
+            value={option}
+            onChange={(e) => handleOptionChange(index, e.target.value)}
+            placeholder={`Option ${index + 1}`}
+          />
+          <Button
+            onClick={() => handleRemoveOption(index)}
+            disabled={options.length <= 2}
+          >
+            Remove
+          </Button>
+        </Box>
+      ))}
+      <Button onClick={handleAddOption} disabled={options.length >= 10}>
+        Add Option
+      </Button>
+      <Box textAlign="center" sx={{ mt: 4 }}>
+        <Button variant="contained" onClick={handleSubmit}>
           Loo Küsitlus
         </Button>
       </Box>
@@ -147,4 +163,4 @@ const loo_kusitlus = () => {
   );
 };
 
-export default loo_kusitlus;
+export default LooKusitlus;
