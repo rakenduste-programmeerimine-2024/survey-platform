@@ -13,15 +13,18 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 
+// Main Signup Page Component
 export default function SignupPage() {
-  const searchParams = useSearchParams();
-  const [message, setMessage] = useState<{ success?: string; error?: string } | null>(null);
-  const [passwordStrength, setPasswordStrength] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
-  const [isPasswordMatch, setIsPasswordMatch] = useState<boolean | null>(null);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState<boolean>(false);
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+
  
 
   // UseEffect for handling searchParams and setting messages
