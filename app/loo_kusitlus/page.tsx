@@ -83,7 +83,7 @@ const LooKusitlus = () => {
 
   return (
     <Container>
-      <Typography variant="h4" sx={{ mb: 2 }}>
+      <Typography variant="h4" sx={{ mb: 2, color: "black" }}>
         Loo Küsitlus
       </Typography>
 
@@ -116,7 +116,7 @@ const LooKusitlus = () => {
         }}
       />
 
-      <FormControl fullWidth sx={{ mb: 2, mt: 2 }}>
+      <FormControl fullWidth sx={{ mb: 2, }}>
         <InputLabel>Vastuste arv</InputLabel>
         <Select
           value={maxAnswers}
@@ -140,7 +140,7 @@ const LooKusitlus = () => {
         </Select>
       </FormControl>
 
-      <Typography variant="h6" sx={{ mb: 2 }}>
+      <Typography variant="h6" sx={{ mb: 2, color:"black" }}>
         Valikuvõimalused
       </Typography>
 
