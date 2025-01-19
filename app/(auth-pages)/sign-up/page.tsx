@@ -1,73 +1,97 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation"; // Import the hook
-import { signUpAction } from "@/app/actions";
+import { createClient } from "@supabase/supabase-js";
+import { useState } from "react";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
-// Main Signup Page Component
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error("Missing Supabase environment variables!");
+}
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 export default function SignupPage() {
-  const searchParams = useSearchParams();
-  const [message, setMessage] = useState<{ success?: string; error?: string } | null>(null);
-  const [passwordStrength, setPasswordStrength] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
-  const [isPasswordMatch, setIsPasswordMatch] = useState<boolean | null>(null);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState<boolean>(false);
- 
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
 
-  // UseEffect for handling searchParams and setting messages
-  useEffect(() => {
-    if (searchParams) {
-      const success = searchParams.get("success");
-      const error = searchParams.get("error");
-      setMessage({ success: success || undefined, error: error || undefined });
-    }
-  }, [searchParams]);
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
 
-  // Handle Password Strength Indicator
-  const handlePasswordChange = (password: string) => {
-    setPassword(password);
-    if (password.length < 6) {
-      setPasswordStrength("Weak");
-    } else if (password.length < 10) {
-      setPasswordStrength("Medium");
-    } else {
-      setPasswordStrength("Strong");
+    // Password validation
+    if (password !== passwordConfirmation) {
+      setError("Paroolid ei ühti.");
+      setLoading(false);
+      return;
     }
 
-    // Check if password matches the confirmation
-    if (passwordConfirmation && password !== passwordConfirmation) {
-      setIsPasswordMatch(false);
-    } else {
-      setIsPasswordMatch(true);
+    // Email validation (simple regex)
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      setError("E-posti aadress ei ole kehtiv.");
+      setLoading(false);
+      return;
     }
-  };
 
-  // Handle Password Confirmation Change
-  const handlePasswordConfirmationChange = (confirmation: string) => {
-    setPasswordConfirmation(confirmation);
+    try {
+      console.log("Alustame registreerimist...");
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            first_name: firstName,
+            last_name: lastName,
+          },
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
 
-    // Check if password matches the confirmation
-    if (password && password !== confirmation) {
-      setIsPasswordMatch(false);
-    } else {
-      setIsPasswordMatch(true);
+      console.log("Signup vastus:", { data, error });
+
+      if (error) {
+        throw error;
+      }
+
+      if (data.user) {
+        setSuccess("Registreerimine õnnestus! Kontrollige oma e-posti kinnituse saamiseks.");
+        console.log("Kasutaja edukalt registreeritud:", data.user);
+      } else {
+        setError("Kasutaja registreerimisel tekkis ootamatu probleem.");
+        console.error("Andmed puuduvad, ootamatu viga:", data);
+      }
+    } catch (err: any) {
+      setError(err.message || "Midagi läks valesti.");
+      console.error("Viga registreerimisel:", err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-black-100">
-      <form className="flex flex-col w-full max-w-sm mx-auto p-6 bg-white shadow-md rounded-lg">
-        <h1 className="text-2xl font-semibold text-center text-black">Sign up</h1>
+      <form
+        onSubmit={handleSignup}
+        className="flex flex-col w-full max-w-sm mx-auto p-6 bg-white shadow-md rounded-lg"
+      >
+        <h1 className="text-2xl font-semibold text-center text-black">Registreeru</h1>
         <p className="text-sm text-center text-red-500 mt-2">
-          Already have an account?{" "}
+          Kas teil on juba konto?{" "}
           <Link className="text-blue-500 font-medium underline" href="/sign-in">
-            Sign in
+            Logi sisse
           </Link>
         </p>
 
@@ -75,105 +99,88 @@ export default function SignupPage() {
           {/* First Name Input */}
           <div>
             <Label htmlFor="first-name" className="text-black">
-              First Name
+              Eesnimi
             </Label>
-            <Input id="first-name" name="first-name" placeholder="John" required />
+            <Input
+              id="first-name"
+              name="first-name"
+              placeholder="John"
+              required
+              onChange={(e) => setFirstName(e.target.value)}
+            />
           </div>
 
           {/* Last Name Input */}
           <div>
             <Label htmlFor="last-name" className="text-black">
-              Last Name
+              Perekonnanimi
             </Label>
-            <Input id="last-name" name="last-name" placeholder="Doe" required />
+            <Input
+              id="last-name"
+              name="last-name"
+              placeholder="Doe"
+              required
+              onChange={(e) => setLastName(e.target.value)}
+            />
           </div>
 
           {/* Email Input */}
           <div>
             <Label htmlFor="email" className="text-black">
-              Email
+              E-post
             </Label>
-            <Input id="email" name="email" type="email" placeholder="you@example.com" required />
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="teie@example.com"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
 
           {/* Password Input */}
           <div>
             <Label htmlFor="password" className="text-black">
-              Password
+              Parool
             </Label>
             <Input
               id="password"
-              type={showPassword ? "text" : "password"} // Toggle visibility
+              type="password"
               name="password"
-              placeholder="Your password"
+              placeholder="Teie parool"
               minLength={6}
               required
-              onChange={(e) => handlePasswordChange(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <button
-              type="button"
-              onClick={() => setShowPassword((prev) => !prev)}
-              className="text-sm text-blue-500 mt-1"
-            >
-              {showPassword ? "Hide" : "Show"}
-            </button>
-            {passwordStrength && (
-              <p
-                className={`text-sm mt-1 ${
-                  passwordStrength === "Strong"
-                    ? "text-green-500"
-                    : passwordStrength === "Medium"
-                    ? "text-yellow-500"
-                    : "text-red-500"
-                }`}
-              >
-                Password Strength: {passwordStrength}
-              </p>
-            )}
           </div>
 
           {/* Password Confirmation Input */}
           <div>
             <Label htmlFor="password-confirmation" className="text-black">
-              Confirm Password
+              Kinnita parool
             </Label>
             <Input
               id="password-confirmation"
-              type={showPasswordConfirmation ? "text" : "password"} // Toggle visibility
+              type="password"
               name="password-confirmation"
-              placeholder="Confirm your password"
+              placeholder="Kinnitage oma parool"
               minLength={6}
               required
-              onChange={(e) => handlePasswordConfirmationChange(e.target.value)}
+              onChange={(e) => setPasswordConfirmation(e.target.value)}
             />
-            <button
-              type="button"
-              onClick={() => setShowPasswordConfirmation((prev) => !prev)}
-              className="text-sm text-blue-500 mt-1"
-            >
-              {showPasswordConfirmation ? "Hide" : "Show"}
-            </button>
-            {isPasswordMatch !== null && !isPasswordMatch && (
-              <p className="text-red-500 text-sm mt-1">Passwords do not match!</p>
-            )}
           </div>
 
           {/* Submit Button */}
-          <SubmitButton formAction={signUpAction} pendingText="Signing up...">
-            Sign up
+          <SubmitButton disabled={loading} pendingText="Registreerimine...">
+            Registreeru
           </SubmitButton>
 
-          {/* Message Display */}
-          {message?.success && (
-            <div className="text-green-500 border-l-2 border-green-500 px-4 mt-4">
-              {message.success}
-            </div>
-          )}
-          {message?.error && (
-            <div className="text-red-500 border-l-2 border-red-500 px-4 mt-4">
-              {message.error}
-            </div>
-          )}
+          {/* Success Message */}
+          {success && <div className="text-green-500 text-sm mt-4">{success}</div>}
+
+          {/* Error Message */}
+          {error && <div className="text-red-500 text-sm mt-4">{error}</div>}
         </div>
       </form>
     </div>
