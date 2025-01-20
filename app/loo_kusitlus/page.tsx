@@ -42,9 +42,10 @@ const LooKusitlus = () => {
       return;
     }
 
+    // Insert survey
     const { data: surveyData, error: surveyError } = await supabase
       .from("surveys")
-      .insert([{ description }])
+      .insert([{ title: "Survey Title", description }])
       .select("id");
 
     if (surveyError) {
@@ -54,6 +55,7 @@ const LooKusitlus = () => {
 
     const surveyId = surveyData[0].id;
 
+    // Insert question
     const { data: questionData, error: questionError } = await supabase
       .from("questions")
       .insert([{ survey_id: surveyId, text: questionText, max_answers: maxAnswers }])
@@ -66,6 +68,7 @@ const LooKusitlus = () => {
 
     const questionId = questionData[0].id;
 
+    // Insert answer options
     const optionData = options.map((optionText) => ({
       question_id: questionId,
       option_text: optionText,
@@ -116,7 +119,7 @@ const LooKusitlus = () => {
         }}
       />
 
-      <FormControl fullWidth sx={{ mb: 2, }}>
+      <FormControl fullWidth sx={{ mb: 2 }}>
         <InputLabel>Vastuste arv</InputLabel>
         <Select
           value={maxAnswers}
@@ -140,7 +143,7 @@ const LooKusitlus = () => {
         </Select>
       </FormControl>
 
-      <Typography variant="h6" sx={{ mb: 2, color:"black" }}>
+      <Typography variant="h6" sx={{ mb: 2, color: "black" }}>
         Valikuvõimalused
       </Typography>
 
@@ -175,7 +178,6 @@ const LooKusitlus = () => {
         </Box>
       ))}
 
-      {/* Option Add button */}
       {options.length < maxAnswers && (
         <Button
           onClick={handleAddOption}
