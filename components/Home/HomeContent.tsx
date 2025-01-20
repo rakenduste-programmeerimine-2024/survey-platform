@@ -20,7 +20,7 @@ const HomeContent = () => {
       boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
     }}
     >
-      <Typography variant="h4" gutterBottom sx={{ textAlign: "center", fontWeight: 600 }}>
+      <Typography variant="h4" gutterBottom sx={{ textAlign: "center", fontWeight: 600, color:"black"}}>
         Tere tulemast QuestR küsitlus lehele
       </Typography>
       <Typography variant="body1" gutterBottom sx={{ textAlign: "center", color: "text.secondary" }}>
