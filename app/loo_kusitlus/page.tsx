@@ -11,6 +11,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import supabase from "../../lib/supabaseClient";
 
@@ -19,6 +21,7 @@ const LooKusitlus = () => {
   const [description, setDescription] = useState("");
   const [maxAnswers, setMaxAnswers] = useState(2);
   const [options, setOptions] = useState(Array(2).fill(""));
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleOptionChange = (index: number, value: string) => {
     const updatedOptions = [...options];
@@ -44,7 +47,7 @@ const LooKusitlus = () => {
 
     const { data: surveyData, error: surveyError } = await supabase
       .from("surveys")
-      .insert([{ description }])
+      .insert([{ kirjeldus: description }])
       .select("id");
 
     if (surveyError) {
@@ -55,8 +58,8 @@ const LooKusitlus = () => {
     const surveyId = surveyData[0].id;
 
     const { data: questionData, error: questionError } = await supabase
-      .from("questions")
-      .insert([{ survey_id: surveyId, text: questionText, max_answers: maxAnswers }])
+      .from("kusimus")
+      .insert([{ survey_id: surveyId, text: questionText, vastuste_arv: maxAnswers }])
       .select("id");
 
     if (questionError) {
@@ -71,12 +74,17 @@ const LooKusitlus = () => {
       option_text: optionText,
     }));
 
-    const { error: optionError } = await supabase.from("answer_options").insert(optionData);
+    const { error: optionError } = await supabase.from("valikuvoimalused").insert(optionData);
 
     if (optionError) {
       console.error("Error creating options:", optionError.message);
       return;
     }
+    setSuccessMessage("Your survey has been successfully saved!");
+
+    setQuestionText("");
+    setDescription("");
+    setOptions(Array(2).fill(""));
 
     console.log("Survey successfully created!");
   };
@@ -116,14 +124,14 @@ const LooKusitlus = () => {
         }}
       />
 
-      <FormControl fullWidth sx={{ mb: 2, }}>
+      <FormControl fullWidth sx={{ mb: 2 }}>
         <InputLabel>Vastuste arv</InputLabel>
         <Select
           value={maxAnswers}
           onChange={(e) => {
             const newMaxAnswers = Number(e.target.value);
             setMaxAnswers(newMaxAnswers);
-            setOptions(Array(newMaxAnswers).fill("")); // Reset options to match the selected number
+            setOptions(Array(newMaxAnswers).fill(""));
           }}
           sx={{
             backgroundColor: "white",
@@ -140,7 +148,7 @@ const LooKusitlus = () => {
         </Select>
       </FormControl>
 
-      <Typography variant="h6" sx={{ mb: 2, color:"black" }}>
+      <Typography variant="h6" sx={{ mb: 2, color: "black" }}>
         Valikuvõimalused
       </Typography>
 
@@ -175,7 +183,6 @@ const LooKusitlus = () => {
         </Box>
       ))}
 
-      {/* Option Add button */}
       {options.length < maxAnswers && (
         <Button
           onClick={handleAddOption}
@@ -206,6 +213,22 @@ const LooKusitlus = () => {
           Loo Küsitlus
         </Button>
       </Box>
+
+      {successMessage && (
+        <Snackbar
+          open={Boolean(successMessage)}
+          autoHideDuration={6000}
+          onClose={() => setSuccessMessage(null)}
+        >
+          <Alert
+            onClose={() => setSuccessMessage(null)}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            {successMessage}
+          </Alert>
+        </Snackbar>
+      )}
     </Container>
   );
 };
