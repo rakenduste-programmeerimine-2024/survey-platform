@@ -14,9 +14,13 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 
 const HomeContent = () => {
   return (
-    <Container sx={{ mt: 4, p: 4, borderRadius: 2, background: "linear-gradient(to right, #f3f4f6, #e3e6ea)", boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)" }}>
-      <Typography variant="h4" gutterBottom sx={{ textAlign: "center", fontWeight: 600 }}>
-        Tere tulemast QuestR küsitlus lehele
+    <Container sx={{mt: 4, p: 4, borderRadius: 2,
+      background: "linear-gradient(to right, #f3f4f6, #e3e6ea)",
+      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+    }}
+    >
+      <Typography variant="h4" gutterBottom sx={{ textAlign: "center", fontWeight: 600, color:"black"}}>
+        Tere tulemast QuestR küsitluste lehele
       </Typography>
       <Typography variant="body1" gutterBottom sx={{ textAlign: "center", color: "text.secondary" }}>
         Avasta, osale ja loo küsitlusi kiirelt ja lihtsalt.
