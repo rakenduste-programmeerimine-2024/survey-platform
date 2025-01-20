@@ -21,7 +21,7 @@ const HomeContent = () => {
     }}
     >
       <Typography variant="h4" gutterBottom sx={{ textAlign: "center", fontWeight: 600, color:"black"}}>
-        Tere tulemast QuestR küsitlus lehele
+        Tere tulemast QuestR küsitluste lehele
       </Typography>
       <Typography variant="body1" gutterBottom sx={{ textAlign: "center", color: "text.secondary" }}>
         Avasta, osale ja loo küsitlusi kiirelt ja lihtsalt.
