@@ -38,18 +38,18 @@ export default function RootLayout({
                   </Link>
                   <Link
                     href="/"
-                    className="ml-3 text-lg font-bold hover:underline"
+                    className="ml-3 text-lg font-bold hover:underline text-black"
                   >
                     QuestR küsitlused
                   </Link>
                 </div>
 
                 <div className="flex items-center gap-5">
-                  <Link href="/meist" className="text-sm font-medium hover:underline">
+                  <Link href="/meist" className="text-sm font-medium hover:underline text-black">
                   Meist
                   </Link>
                   <Link
-                    href="/kontakt" className="text-sm font-medium hover:underline"
+                    href="/kontakt" className="text-sm font-medium hover:underline text-black"
                   >
                     Kontakt
                   </Link>
@@ -61,9 +61,9 @@ export default function RootLayout({
                 {children}
               </div>
 
-              <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-10">
+              <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-10 text-black">
                 <p>
-                  © {new Date().getFullYear()} Survey Platform. All rights
+                  © {new Date().getFullYear()} QuestR Survey Platform. All rights
                   reserved.
                 </p>
               </footer>
