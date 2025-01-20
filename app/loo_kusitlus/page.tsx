@@ -11,6 +11,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import supabase from "../../lib/supabaseClient";
 
@@ -19,6 +21,7 @@ const LooKusitlus = () => {
   const [description, setDescription] = useState("");
   const [maxAnswers, setMaxAnswers] = useState(2);
   const [options, setOptions] = useState(Array(2).fill(""));
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleOptionChange = (index: number, value: string) => {
     const updatedOptions = [...options];
@@ -42,10 +45,9 @@ const LooKusitlus = () => {
       return;
     }
 
-    // Insert survey
     const { data: surveyData, error: surveyError } = await supabase
       .from("surveys")
-      .insert([{ title: "Survey Title", description }])
+      .insert([{ kirjeldus: description }])
       .select("id");
 
     if (surveyError) {
@@ -55,10 +57,9 @@ const LooKusitlus = () => {
 
     const surveyId = surveyData[0].id;
 
-    // Insert question
     const { data: questionData, error: questionError } = await supabase
-      .from("questions")
-      .insert([{ survey_id: surveyId, text: questionText, max_answers: maxAnswers }])
+      .from("kusimus")
+      .insert([{ survey_id: surveyId, text: questionText, vastuste_arv: maxAnswers }])
       .select("id");
 
     if (questionError) {
@@ -68,18 +69,22 @@ const LooKusitlus = () => {
 
     const questionId = questionData[0].id;
 
-    // Insert answer options
     const optionData = options.map((optionText) => ({
       question_id: questionId,
       option_text: optionText,
     }));
 
-    const { error: optionError } = await supabase.from("answer_options").insert(optionData);
+    const { error: optionError } = await supabase.from("valikuvoimalused").insert(optionData);
 
     if (optionError) {
       console.error("Error creating options:", optionError.message);
       return;
     }
+    setSuccessMessage("Your survey has been successfully saved!");
+
+    setQuestionText("");
+    setDescription("");
+    setOptions(Array(2).fill(""));
 
     console.log("Survey successfully created!");
   };
@@ -126,7 +131,7 @@ const LooKusitlus = () => {
           onChange={(e) => {
             const newMaxAnswers = Number(e.target.value);
             setMaxAnswers(newMaxAnswers);
-            setOptions(Array(newMaxAnswers).fill("")); // Reset options to match the selected number
+            setOptions(Array(newMaxAnswers).fill(""));
           }}
           sx={{
             backgroundColor: "white",
@@ -208,6 +213,22 @@ const LooKusitlus = () => {
           Loo Küsitlus
         </Button>
       </Box>
+
+      {successMessage && (
+        <Snackbar
+          open={Boolean(successMessage)}
+          autoHideDuration={6000}
+          onClose={() => setSuccessMessage(null)}
+        >
+          <Alert
+            onClose={() => setSuccessMessage(null)}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            {successMessage}
+          </Alert>
+        </Snackbar>
+      )}
     </Container>
   );
 };
